@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_CANDIDATES 5
+struct Candidate {
+char name[50];
+int votes;
+};
+struct Candidate candidates[MAX_CANDIDATES];
+void initializeCandidates() {
+// Initialize candidate names and votes to zero
+for (int i = 0; i < MAX_CANDIDATES; i++) {
+candidates[i].votes = 0;
+}
+// You can modify this section to add candidate names
+strcpy(candidates[0].name, "Candidate 1");
+strcpy(candidates[1].name, "Candidate 2");
+strcpy(candidates[2].name, "Candidate 3");
+strcpy(candidates[3].name, "Candidate 4");
+strcpy(candidates[4].name, "Candidate 5");
+}
+void displayCandidates() {
+printf("List of Candidates:\n");
+for (int i = 0; i < MAX_CANDIDATES; i++) {
+printf("%d. %s\n", i + 1, candidates[i].name);
+}
+}
+void voteForCandidate(int candidateIndex) {
+if (candidateIndex >= 1 && candidateIndex <= MAX_CANDIDATES) {
+candidates[candidateIndex - 1].votes++;
+printf("You've voted for %s\n", candidates[candidateIndex - 1].name);
+} else {
+printf("Invalid candidate number. Please vote within the range.\n");
+}
+}
+void displayResults() {
+printf("\nVoting Results:\n");
+for (int i = 0; i < MAX_CANDIDATES; i++) {
+printf("%s - Votes: %d\n", candidates[i].name, candidates[i].votes);
+}
+}
+8 | P a g e
+int main() {
+initializeCandidates();
+int choice;
+int vote;
+printf("Welcome to the Voting System!\n");
+do {
+printf("\nMenu:\n");
+printf("1. Display Candidates\n");
+printf("2. Vote\n");
+printf("3. Display Results\n");
+printf("4. Exit\n");
+printf("Enter your choice: ");
+scanf("%d", &choice);
+switch (choice) {
+case 1:
+displayCandidates();
+break;
+case 2:
+displayCandidates();
+printf("Enter the candidate number you want to vote for: ");
+scanf("%d", &vote);
+voteForCandidate(vote);
+break;
+case 3:
+displayResults();
+break;
+case 4:
+printf("Exiting...\n");
+break;
+default:
+printf("Invalid choice. Please enter a valid option.\n");
+}
+} while (choice != 4);
+return 0;
+}
